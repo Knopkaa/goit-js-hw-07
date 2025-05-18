@@ -1,31 +1,54 @@
-class Storage {
-  #items;
-
-  constructor(initialItems) {
-    this.#items = initialItems;
+`use strict`;
+const images = [
+  {
+    url: "./images/project.jpg",
+    alt: "Command project",
+  },
+  {
+    url: "./images/idea.jpg",
+    alt: "Idea",
+  },
+  {
+    url: "./images/smartphone.jpg",
+    alt: "Phone with notifications",
+  },
+  {
+    url: "./images/conference.jpg",
+    alt: "Conference room",
+  },
+  {
+    url: "./images/lounge.jpg",
+    alt: "Chilling room",
+  },
+  {
+    url: "./images/workflow.jpg",
+    alt: "Wolf of Wall Street",
   }
+];
 
-  getItems() {
-    return this.#items;
-  }
+const gallery = document.querySelector(".gallery");
+const listItems = images.map(
+  ({ url, alt }) => {
+    return `
+    <li class="list-item">
+      <img src="${url}" alt="${alt}" class="images" />
+    </li>`
+  })
+  .join("");
+console.log(gallery);
+gallery.insertAdjacentHTML("beforeend", listItems);
+// gallery.innerHTML = `${listItems}`;
 
-  addItem(newItem) {
-    this.#items.push(newItem);
-  }
+// const gallery = document.querySelector(".gallery");
+// const listItems = images.map(item => {
+//   const li = document.createElement("li");
+//   const img = document.createElement("img");
+//   li.classList.add("list-item");
+//   img.classList.add("images");
+//   img.src = item.url;
+//   img.alt = item.alt;
+//   li.appendChild(img);
+//   return li;
+// })
+// gallery.append(...listItems);
 
-  removeItem(itemToRemove) {
-    this.#items = this.#items.filter(item => item !== itemToRemove);
-  }
-}
-
-
-const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
-console.log(storage.getItems()); 
-storage.addItem("Droid");
-console.log(storage.getItems()); 
-
-storage.removeItem("Prolonger");
-console.log(storage.getItems()); 
-
-storage.removeItem("Scaner");
-console.log(storage.getItems()); 
